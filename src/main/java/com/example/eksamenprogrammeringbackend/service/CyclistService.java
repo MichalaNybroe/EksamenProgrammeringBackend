@@ -43,4 +43,16 @@ public class CyclistService {
     public Optional<Cyclist> readCyclist(Long id) {
         return cyclistRepository.findById(id);
     }
+
+    public List<Cyclist> getAllCyclistSortedByMountainScore() {
+        return cyclistRepository.findCyclistsSortedByMountainPoints();
+    }
+
+    public List<Cyclist> getAllCyclistSortedBySpurtPoints() {
+        return cyclistRepository.findCyclistSortedBySpurtPoints();
+    }
+
+    public List<Cyclist> getAllCyclistSortedByAgeAndTime() {
+        return cyclistRepository.findCyclistSortedByTimeAndAge();
+    }
 }

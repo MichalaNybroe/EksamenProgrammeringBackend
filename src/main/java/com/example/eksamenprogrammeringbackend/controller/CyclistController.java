@@ -21,6 +21,12 @@ public class CyclistController {
         if (sort!= null) {
             if (sort.equals("team")) {
                 return cyclistService.getAllCyclistSortedByCyclingTeam();
+            } else if (sort.equals("mountain")){
+                return cyclistService.getAllCyclistSortedByMountainScore();
+            } else if (sort.equals("spurt")) {
+                return cyclistService.getAllCyclistSortedBySpurtPoints();
+            } else if (sort.equals("ageTime")) {
+                return cyclistService.getAllCyclistSortedByAgeAndTime();
             } else {
                 return cyclistService.getAllCyclistSortedByTotalTime();
             }

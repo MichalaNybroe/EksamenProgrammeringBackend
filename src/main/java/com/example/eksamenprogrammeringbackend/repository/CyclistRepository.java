@@ -12,4 +12,13 @@ public interface CyclistRepository extends JpaRepository<Cyclist, Long> {
 
     @Query("select c from Cyclist c order by c.totalTime")
     List<Cyclist> findAllSortedByTotalTime();
+
+    @Query("select c from Cyclist c order by c.mountainPoints desc")
+    List<Cyclist> findCyclistsSortedByMountainPoints();
+
+    @Query("select c from Cyclist c order by c.spurtPoints desc")
+    List<Cyclist> findCyclistSortedBySpurtPoints();
+
+    @Query("select c from Cyclist c where c.age < 26 order by c.totalTime")
+    List<Cyclist> findCyclistSortedByTimeAndAge();
 }
