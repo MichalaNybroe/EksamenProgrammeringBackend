@@ -19,16 +19,17 @@ public class CyclistController {
     @GetMapping("/cyclist")
     public List<Cyclist> readAllCyclists(@RequestParam(required = false) String sort) {
         if (sort!= null) {
-            if (sort.equals("team")) {
-                return cyclistService.getAllCyclistSortedByCyclingTeam();
-            } else if (sort.equals("mountain")){
-                return cyclistService.getAllCyclistSortedByMountainScore();
-            } else if (sort.equals("spurt")) {
-                return cyclistService.getAllCyclistSortedBySpurtPoints();
-            } else if (sort.equals("ageTime")) {
-                return cyclistService.getAllCyclistSortedByAgeAndTime();
-            } else {
-                return cyclistService.getAllCyclistSortedByTotalTime();
+            switch (sort) {
+                case "team":
+                    return cyclistService.getAllCyclistSortedByCyclingTeam();
+                case "mountain":
+                    return cyclistService.getAllCyclistSortedByMountainScore();
+                case "spurt":
+                    return cyclistService.getAllCyclistSortedBySpurtPoints();
+                case "ageTime":
+                    return cyclistService.getAllCyclistSortedByAgeAndTime();
+                default:
+                    return cyclistService.getAllCyclistSortedByTotalTime();
             }
         }
         return cyclistService.readAllCyclist();
