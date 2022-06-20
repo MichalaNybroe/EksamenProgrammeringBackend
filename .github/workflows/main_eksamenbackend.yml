@@ -49,5 +49,5 @@ jobs:
         with:
           app-name: 'EksamenBackend'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_4A71FDF0B8154DBC81790C18BADF2764 }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_72D50E9F516B48DBBBF6FC6385EBD799 }}
           package: '*.jar'
