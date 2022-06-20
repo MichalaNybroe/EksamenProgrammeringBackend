@@ -2,6 +2,8 @@ package com.example.eksamenprogrammeringbackend.service;
 
 import com.example.eksamenprogrammeringbackend.model.Cyclist;
 import com.example.eksamenprogrammeringbackend.repository.CyclistRepository;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.Sort;
 import org.springframework.stereotype.Component;
 
 import java.util.List;
@@ -33,6 +35,7 @@ public class CyclistService {
     }
 
     public List<Cyclist> getAllCyclistSortedByCyclingTeam() {
+        //return cyclistRepository.findAll(pageable, Sort.by("cyclingTeam.name"));
         return cyclistRepository.findAllSortedByCyclingTeam();
     }
 

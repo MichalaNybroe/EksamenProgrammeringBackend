@@ -1,8 +1,10 @@
 package com.example.eksamenprogrammeringbackend.controller;
 
+import com.example.eksamenprogrammeringbackend.exception.DeleteException;
 import com.example.eksamenprogrammeringbackend.model.Cyclist;
 import com.example.eksamenprogrammeringbackend.service.CyclistService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -43,6 +45,9 @@ public class CyclistController {
     @PostMapping("/cyclist")
     @ResponseStatus(HttpStatus.CREATED)
     public Cyclist createCyclist(@RequestBody Cyclist cyclist) {
+        if (cyclist.getMountainPoints()< 0) {
+            throw new IllegalArgumentException("Ugyldig bjerpointsværdi");
+        }
         return cyclistService.createCyclist(cyclist);
     }
 
@@ -54,7 +59,17 @@ public class CyclistController {
 
     @DeleteMapping("/cyclist/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteCyclist(@PathVariable Long id) {
-        cyclistService.deleteCyclist(id);
+    public void deleteCyclist(@PathVariable Long id) throws DeleteException {
+        try {
+            cyclistService.deleteCyclist(id);
+        } catch (EmptyResultDataAccessException exception) {
+            throw new DeleteException("Dette id eksistere ikke");
+        }
+
+    }
+
+    @ExceptionHandler({IllegalArgumentException.class, DeleteException.class})
+    public String exceptionhandler(Exception exception) {
+        return exception.getMessage();
     }
 }
